@@ -1,21 +1,85 @@
 <!DOCTYPE html>
 <html lang="en">
-	<head>
-		<meta charset="utf-8">
-		<title>Dijkstra</title>
-		<script src="graph.js"></script>
-	</head>
-	<body>
-		<script>
-			var map = {a:{b:3,c:1},b:{a:2,c:1},c:{a:4,b:1}},
-			    graph = new Graph(map);
-
-			console.log(graph.findShortestPath('a', 'b'));
-			console.log(graph.findShortestPath('a', 'c'));
-			console.log(graph.findShortestPath('b', 'a'));
-			console.log(graph.findShortestPath('b', 'c', 'b'));
-			console.log(graph.findShortestPath('c', 'a', 'b'));
-			console.log(graph.findShortestPath('c', 'b', 'a'));
-		</script>
-	</body>
+  <head>
+    <meta charset="utf-8" />
+    <title>Dijkstra</title>
+    <script src="graph.js"></script>
+    <style>
+      table,
+      th,
+      td {
+        border: 1px solid black;
+        border-collapse: collapse;
+        padding: 20px;
+      }
+    </style>
+  </head>
+  <body>
+    <pre>Map: { a: { b: 3, c: 1 }, b: { a: 2, c: 1 }, c: { a: 4, b: 1 } }</pre>
+    <table>
+      <tr>
+        <th>From To</th>
+        <th>Path</th>
+        <th>Length</th>
+      </tr>
+      <tr>
+        <td>a > b</td>
+        <td id="dest1"></td>
+        <td id="dest1-len"></td>
+      </tr>
+      <tr>
+        <td>a > c</td>
+        <td id="dest2"></td>
+        <td id="dest2-len"></td>
+      </tr>
+      <tr>
+        <td>b > a</td>
+        <td id="dest3"></td>
+        <td id="dest3-len"></td>
+      </tr>
+      <tr>
+        <td>b > c > b</td>
+        <td id="dest4"></td>
+        <td id="dest4-len"></td>
+      </tr>
+      <tr>
+        <td>c > a > b</td>
+        <td id="dest5"></td>
+        <td id="dest5-len"></td>
+      </tr>
+      <tr>
+        <td>c > b > a</td>
+        <td id="dest6"></td>
+        <td id="dest6-len"></td>
+      </tr>
+    </table>
+    <script>
+      var map = { a: { b: 3, c: 1 }, b: { a: 2, c: 1 }, c: { a: 4, b: 1 } },
+        graph = new Graph(map);
+      // a-b
+      var ab = graph.findShortestPath("a", "b");
+      document.getElementById("dest1").innerText = ab.join(" > ");
+      document.getElementById("dest1-len").innerText = ab.length;
+      // a-c
+      var ab = graph.findShortestPath("a", "c");
+      document.getElementById("dest2").innerText = ab.join(" > ");
+      document.getElementById("dest2-len").innerText = ab.length;
+      // b-a
+      var ab = graph.findShortestPath("b", "a");
+      document.getElementById("dest3").innerText = ab.join(" > ");
+      document.getElementById("dest3-len").innerText = ab.length;
+      // b-c-b
+      var ab = graph.findShortestPath("b", "c", "b");
+      document.getElementById("dest4").innerText = ab.join(" > ");
+      document.getElementById("dest4-len").innerText = ab.length;
+      // c-a-b
+      var ab = graph.findShortestPath("c", "a", "b");
+      document.getElementById("dest5").innerText = ab.join(" > ");
+      document.getElementById("dest5-len").innerText = ab.length;
+      // c-a-b
+      var ab = graph.findShortestPath("c", "b", "a");
+      document.getElementById("dest6").innerText = ab.join(" > ");
+      document.getElementById("dest6-len").innerText = ab.length;
+    </script>
+  </body>
 </html>
